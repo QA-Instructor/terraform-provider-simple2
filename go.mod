@@ -1,4 +1,4 @@
-module github.com/QA-Instructor/terraform-provider-simple2.git
+module github.com/QA-Instructor/terraform-provider-simple2
 
 go 1.25.5
 

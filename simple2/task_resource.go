@@ -83,7 +83,12 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 
 	respData, _ := io.ReadAll(res.Body)
 	var created map[string]interface{}
-	json.Unmarshal(respData, &created)
+	error := json.Unmarshal(respData, &created)
+	if error != nil {
+		resp.Diagnostics.AddError("Decode Failed", error.Error())
+		return
+	}
+
 
 	data.ID = types.StringValue(fmt.Sprintf("%v", created["id"]))
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
